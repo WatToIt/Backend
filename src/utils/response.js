@@ -1,21 +1,23 @@
-module.exports.ResponseError = function(res, err, code){ // Error Web Response
-    if(typeof err == 'object' && typeof err.message != 'undefined'){
-        err = err.message;
+module.exports.ResponseError = function (res, err, code) {
+    let toSend = { success: 0 };
+    if (code) res.statusCode = code;
+    if (err.message) {
+        toSend.message = err.message;
     }
-
-    if(typeof code !== 'undefined') res.statusCode = code;
-
-    return res.json({success:0, error: err});
+    if (err.error) {
+        toSend.error = err.error;
+    }
+    return res.json(toSend);
 };
 
-module.exports.ResponseSuccess = function(res, data, code){ 
-    let send_data = {success:1};
+module.exports.ResponseSuccess = function (res, data, code) {
+    let toSend = { success: 1 };
 
-    if(typeof data == 'object'){
-        send_data = Object.assign(data, send_data);
+    if (data) {
+        toSend.data = data;
     }
 
-    if(typeof code !== 'undefined') res.statusCode = code;
+    if (code) res.statusCode = code;
 
-    return res.json(send_data)
+    return res.json(toSend);
 };

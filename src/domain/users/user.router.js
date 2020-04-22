@@ -4,15 +4,16 @@ const {
     getUserById,
     getUserByUsername,
     createUser,
-    getUsers
+    getUsers,
+    validate
 } = require("./user.controller");
 const{checkToken} = require("../../utils/tokenCheckMiddleware");
 
 
-router.post('/login/', login)
-router.get('/:id', checkToken, getUserById);
+router.post('/login/',validate('login'), login)
+router.get('/:id',checkToken, getUserById);
 router.get("/", checkToken, getUsers);
-router.post("/", checkToken, createUser);
+router.post("/", checkToken, validate('createUser'),  createUser);
 router.get("/username/:username", getUserByUsername);
 
 
