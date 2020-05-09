@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const userRouter = require('./domain/users/user.router');
+const preferenceRouter = require('./domain/preferences/preference.router');
 
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/api/users", userRouter);
+app.use("/api/preferences",preferenceRouter);
 
 
 app.listen(process.env.APP_PORT, ()=>{

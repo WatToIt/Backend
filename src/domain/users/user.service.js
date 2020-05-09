@@ -1,7 +1,7 @@
 const pool = require("../../config/database");
 
 
-const createUser = (data, callBack) => (
+const createUser = (data) => (
     pool.query(`INSERT INTO users(id, username, email, password) values (?,?,?,?)`,
         [
             data.id,
