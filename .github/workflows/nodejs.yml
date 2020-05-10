@@ -15,4 +15,5 @@ jobs:
         node-version: 10.x
     - run: npm install
     - run: forever stopall
-    - run: forever start -o ./o.log -e ./e.log src/app.js &
+    - run: rm ./*.log
+    - run: forever start -o ./o.log -e ./e.log src/app.js
