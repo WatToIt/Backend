@@ -13,7 +13,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
-    - run: pwdx $$
     - run: npm install
     - run: forever stopall
-    - run: forever start -o o.log -e e.log src/app.js
+    - run: forever start -o ./o.log -e ./e.log src/app.js &
