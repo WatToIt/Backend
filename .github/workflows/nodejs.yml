@@ -17,4 +17,4 @@ jobs:
     - run: forever stopall
     - run: rm ./o.log ./e.log
       continue-on-error: true
-    - run: forever start -o ./o.log -e ./e.log src/app.js
+    - run: forever start --minUptime 5000 -o o.log -e e.log src/app.js
