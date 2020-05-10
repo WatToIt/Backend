@@ -18,3 +18,13 @@ jobs:
     - run: rm ./o.log ./e.log
       continue-on-error: true
     - run: forever start --minUptime 5000 -o o.log -e e.log src/app.js
+      env:
+        APP_PORT: 3000
+        DB_HOST: ${{secrets.DB_HOST}}
+        DB_USER: ${{secrets.DB_USER}}
+        DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+        DB_NAME: ${{secrets.DB_NAME}}
+        DB_PORT: 3000
+        DB_CONN_LIM: 10
+        JWT_ENCRYPTION: PleaseChange
+        JWT_EXPIRATION: 10h
