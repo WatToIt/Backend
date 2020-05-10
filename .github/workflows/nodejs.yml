@@ -9,10 +9,6 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
-    - name: Deployment
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: 10.x
     - run: npm install
     - run: forever stopall
     - run: rm ./o.log ./e.log
