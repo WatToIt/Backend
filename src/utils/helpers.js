@@ -12,8 +12,16 @@ function objectKeyMap(object, mapFn) {
     }, {})
 }
 
+function fold (reducer, init, xs)  {
+    let acc = init;
+    for (const x of xs) {
+        acc = reducer(acc, x);
+    }
+    return acc;
+};
 
 module.exports = {
     objectValueMap,
-    objectKeyMap
+    objectKeyMap,
+    fold
 }
