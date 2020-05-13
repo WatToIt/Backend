@@ -24,3 +24,6 @@ jobs:
         DB_CONN_LIM: 10
         JWT_ENCRYPTION: PleaseChange
         JWT_EXPIRATION: 10h
+        EDAMAM_API_HOST: https://api.edamam.com/search
+        EDAMAM_APP_ID: ${{secrets.EDAMAM_APP_ID}}
+        EDAMAM_APP_KEY: ${{secrets.EDAMAM_APP_KEY}}
