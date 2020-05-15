@@ -35,10 +35,33 @@ const createUser = async (req, res) => {
         }
 
         const salt = genSaltSync(10);
+        const origPassword = body.password;
         body.password = hashSync(body.password, salt);
         body.id = uuid();
         const creationResults = await userService.createUser(req.body);
-        return ResponseSuccess(res, creationResults, 200);
+
+        const foundUser = await userService.getUserByUsername(req.body.username);
+        if (foundUser && foundUser.length == 0) {
+            return ResponseError(res, { message: "Invalid username or password" }, 401);
+        }
+        const user = foundUser[0];
+        const loginResult = compareSync(origPassword, user.password);
+        if (loginResult) {
+            user.password = undefined;
+            const jsonToken = sign({ result: user }, process.env.JWT_ENCRYPTION, {
+                expiresIn: process.env.JWT_EXPIRATION
+            });
+            return res.status(200).json({
+                success: 1,
+                message: "Registration is successful",
+                token: jsonToken,
+                data: creationResults
+            });
+        }else {
+            return ResponseError(res, { message: "Some problem((" }, 401);
+        }
+
+
     }
     catch (error) {
         console.log(error);
